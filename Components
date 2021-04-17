@@ -1,0 +1,264 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+
+//////////////////////////////////////////////////////////////////////////////// Explore catogories
+// ignore: camel_case_types
+class Explore_catagories extends StatelessWidget {
+
+  List<exploreCatagories_constructor> exploreCatagoriesList() {
+    return [
+    exploreCatagories_constructor(url: 'https://unsplash.com/photos/OBufvGMaBaQ'),
+    exploreCatagories_constructor(url: 'https://unsplash.com/photos/dfwFFQLvc0s'),
+    exploreCatagories_constructor(url: 'https://unsplash.com/photos/9BE8hiqvUM4'),
+    exploreCatagories_constructor(url: 'https://unsplash.com/photos/OhKElOkQ3RE'),
+    exploreCatagories_constructor(url: 'https://unsplash.com/photos/FsXq3xu72bs'),
+    exploreCatagories_constructor(url: 'https://unsplash.com/photos/BFyTdSthQDA'),
+  ];
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Container(
+        height: 100.0,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: exploreCatagoriesList().map<Widget>((link){
+            return Explore_container(url: link.url);
+          }).toList(),
+        ),
+      ),
+    );
+  }
+}
+
+// ignore: camel_case_types
+class exploreCatagories_constructor{
+  exploreCatagories_constructor({this.url});
+  final String url;
+
+}
+
+// ignore: camel_case_types
+class Explore_container extends StatelessWidget {
+  Explore_container({this.url});
+  final String url;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 8.0),
+      height: 100,
+      width: 100,
+      decoration: BoxDecoration(
+          color: Colors.purple[100],
+          borderRadius: BorderRadius.circular(10.0),
+        image: DecorationImage(
+          image: NetworkImage('$url'),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////// explore list
+
+
+// ignore: camel_case_types
+class Explore_list extends StatelessWidget {
+
+  List<Explore_Textcontainer> text_list = [
+    Explore_Textcontainer(text: 'Fashion',),
+    Explore_Textcontainer(text: 'Travel',),
+    Explore_Textcontainer(text: 'Photography',),
+    Explore_Textcontainer(text: 'cars',),
+    Explore_Textcontainer(text: 'Anime',),
+    Explore_Textcontainer(text: 'Lifestyle',),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Container(
+        height: 50.0,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: text_list,
+        ),
+      ),
+    );
+  }
+}
+
+// ignore: camel_case_types
+class Explore_Textcontainer extends StatelessWidget {
+  Explore_Textcontainer({this.text});
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 8.0),
+      decoration: BoxDecoration(
+          color: Color(0xFFE0E0E0),
+          borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Center(child: Text('$text', style: GoogleFonts.roboto(fontSize: 17.0,fontWeight: FontWeight.w500),)),
+      ),
+    );
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////// Grid List
+
+
+class GridList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+      child: StaggeredGridView.countBuilder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        crossAxisCount: 2,
+        itemCount: imageList.length,
+        itemBuilder: (context, index) {
+          return ImageCard(
+            imageData: imageList[index],
+          );
+        },
+        staggeredTileBuilder: (index) =>
+            StaggeredTile.count(1,1),
+        crossAxisSpacing: 8.0,
+        mainAxisSpacing: 8.0,
+      ),
+    );
+  }
+}
+
+
+class ImageCard extends StatelessWidget {
+  const ImageCard({this.imageData});
+
+  final ImageData imageData;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16.0),
+        child: Image.network(imageData.imageUrl, fit: BoxFit.cover));
+  }
+}
+
+
+class ImageData {
+  final String id;
+  final String imageUrl;
+
+  const ImageData({
+    @required this.id,
+    @required this.imageUrl,
+  });
+}
+
+  List<ImageData> imageList = [
+  ImageData(
+    id: 'id-001',
+    imageUrl: 'https://picsum.photos/seed/image001/500/500',
+  ),
+  ImageData(
+    id: 'id-002',
+    imageUrl: 'https://picsum.photos/seed/image002/500/800',
+  ),
+  ImageData(
+    id: 'id-003',
+    imageUrl: 'https://picsum.photos/seed/image003/500/300',
+  ),
+  ImageData(
+    id: 'id-004',
+    imageUrl: 'https://picsum.photos/seed/image004/500/900',
+  ),
+  ImageData(
+    id: 'id-005',
+    imageUrl: 'https://picsum.photos/seed/image005/500/600',
+  ),
+  ImageData(
+    id: 'id-006',
+    imageUrl: 'https://picsum.photos/seed/image006/500/500',
+  ),
+  ImageData(
+    id: 'id-007',
+    imageUrl: 'https://picsum.photos/seed/image007/500/400',
+  ),
+  ImageData(
+    id: 'id-008',
+    imageUrl: 'https://picsum.photos/seed/image008/500/700',
+  ),
+  ImageData(
+    id: 'id-009',
+    imageUrl: 'https://picsum.photos/seed/image009/500/600',
+  ),
+  ImageData(
+    id: 'id-010',
+    imageUrl: 'https://picsum.photos/seed/image010/500/900',
+  ),
+  ImageData(
+    id: 'id-011',
+    imageUrl: 'https://picsum.photos/seed/image011/500/900',
+  ),
+  ImageData(
+    id: 'id-012',
+    imageUrl: 'https://picsum.photos/seed/image012/500/700',
+  ),
+  ImageData(
+    id: 'id-013',
+    imageUrl: 'https://picsum.photos/seed/image013/500/700',
+  ),
+  ImageData(
+    id: 'id-014',
+    imageUrl: 'https://picsum.photos/seed/image014/500/800',
+  ),
+  ImageData(
+    id: 'id-015',
+    imageUrl: 'https://picsum.photos/seed/image015/500/500',
+  ),
+  ImageData(
+    id: 'id-016',
+    imageUrl: 'https://picsum.photos/seed/image016/500/700',
+  ),
+  ImageData(
+    id: 'id-017',
+    imageUrl: 'https://picsum.photos/seed/image017/500/600',
+  ),
+  ImageData(
+    id: 'id-018',
+    imageUrl: 'https://picsum.photos/seed/image018/500/900',
+  ),
+  ImageData(
+    id: 'id-019',
+    imageUrl: 'https://picsum.photos/seed/image019/500/800',
+  ),
+];
+
+///////////////////////////////////////////////////////////////////////////////////// Divider
+
+// ignore: camel_case_types
+class divider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Divider(
+        height: 2.0,
+        thickness: 2.0,
+        indent: 10.0,
+        endIndent: 10.0,
+        color: Colors.grey[200],
+      ),
+    );
+  }
+}
